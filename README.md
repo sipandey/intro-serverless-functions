@@ -1,6 +1,6 @@
 # Serverless Functions
 
-Inspiration:
+Inspired by Jason Lengstorf:
 ### [See details](https://frontendmasters.com/workshops/serverless-functions/)
 
 ## Resources
