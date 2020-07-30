@@ -1,8 +1,18 @@
 const { query } = require('./util/hasura');
 
-exports.handler = async event => {
+exports.handler = async (event, context) => {
   //   console.log(event);
   const { id, title, tagline, poster } = JSON.parse(event.body);
+  const { user } = context.clientContext;
+  const isLoggedIn = user && user.app_metadata;
+  const roles = user.app_metadata.roles || [];
+
+  if (!isLoggedIn || !roles.includes('admin')) {
+    return {
+      statusCode: 404,
+      body: 'unauthorized',
+    };
+  }
 
   const result = await query({
     query: `
